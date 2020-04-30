@@ -1,0 +1,36 @@
+	
+/*************************JITSI SDK CUSTOMIZATION*****************************************/
+
+UI CUSTOMIZATION
+1.git clone https://github.com/jitsi/jitsi-meet 
+2.Navigate to the react folder
+3.For UI buttons customization, edit features/toolbox/components/native/Toolbox.js
+4.You can edit other Js files within the native subfolder for various customizations.
+
+REBUILDING THE JITSI SDK.
+
+Once you are done with the UI customization, you cn rebuild the jitsi-sdk to reflect those changes in your native android/ios app.For android:
+
+1)Navigate to the root of the cloned repository.
+2) run 'npm install' to pull all the react-native dependencies
+3)create a folder /tmp/repo in your UNIX(linux or  mac os).For windows this operations won't work
+4)run ./android/scripts/release-sdk.sh /tmp/repo  .(Ensure you have maven installed on your machine)
+
+Once the the script executes succesfully,You're now ready to use the artifacts.
+You can use your local repository to replace the Jitsi repository (maven { url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases" }) when you published all subprojects.
+
+ In your project, add the Maven repository that you used above (/tmp/repo) into your top-level build.gradle file:
+
+allprojects {
+    repositories {
+        maven { url "file:/tmp/repo" }
+        google()
+        jcenter()
+    }
+}
+
+
+Then, define the dependency org.jitsi.react:jitsi-meet-sdk into the build.gradle file of your module:
+implementation ('org.jitsi.react:jitsi-meet-sdk:+') { transitive = true }.
+
+for more information on this head to https://github.com/jitsi/jitsi-meet/blob/master/android/README.md
