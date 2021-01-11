@@ -1,6 +1,6 @@
 # jitsi-react
 
-##Installation and configuration
+## Installation and configuration
 
 1.clone this project to your local machine.
 
